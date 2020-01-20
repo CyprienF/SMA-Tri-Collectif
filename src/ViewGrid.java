@@ -16,7 +16,7 @@ public class ViewGrid extends JComponent implements KeyListener {
 
     public ViewGrid(Grid myGrid) {
         this.myGrid = myGrid;
-        this.sizeSlot = 1000 / myGrid.getSizeM();
+        this.sizeSlot = 800 / myGrid.getSizeM();
         this.setFocusable(true);
         this.addKeyListener(this);
     }
@@ -32,9 +32,9 @@ public class ViewGrid extends JComponent implements KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
-        sizeSlot = 1000 / myGrid.getSizeM();
+        sizeSlot = 800 / myGrid.getSizeM();
 
-        g2D.setStroke(new BasicStroke(7));
+        g2D.setStroke(new BasicStroke(3));
         g2D.setFont(new Font("Times", Font.BOLD, sizeSlot / 4));
         for (int i = 0; i < myGrid.getSizeM(); i++) {
             for (int j = 0; j < myGrid.getSizeN(); j++) {
