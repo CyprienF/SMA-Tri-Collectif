@@ -1,4 +1,5 @@
 import com.polytech.sma.model.Grid;
+import com.polytech.sma.model.ViewGrid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class AppWindow extends JFrame {
         pano.setLayout(new GridBagLayout());
 
         view=new ViewGrid(grid);
+        grid.setView(view);
         pano.add(view);
         this.setContentPane(pano);
         this.pack();

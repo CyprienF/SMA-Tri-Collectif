@@ -1,3 +1,5 @@
+package com.polytech.sma.model;
+
 import com.polytech.sma.model.Grid;
 
 import javax.swing.*;

@@ -12,7 +12,16 @@ public class Grid {
     private int sizeN;
     private int sizeM;
     private int numberOfAgents;
+    private int numberOfObjects;
+    private ViewGrid view;
 
+    public void setView(ViewGrid view) {
+        this.view = view;
+    }
+
+    public void notifyView(){
+        this.view.repaint();
+    }
 
     public int getSizeN() {
         return sizeN;
@@ -34,10 +43,12 @@ public class Grid {
         return myGrid[i][j].getValue();
     }
 
-    public Grid(int sizeM, int sizeN, int numberOfAgents) {
+    public Grid(int sizeM, int sizeN, int numberOfAgents, int numberOfObject) {
         this.sizeM = sizeM;
         this.sizeN = sizeN;
         this.numberOfAgents = numberOfAgents;
+        this.numberOfObjects = numberOfObject;
+
         myGrid = new Slot[sizeM][sizeN];
         for (int i = 0; i < sizeM; i++) {
             for (int j = 0; j < sizeN; j++) {
@@ -108,7 +119,18 @@ public class Grid {
 
         for(int i = 1; i<= numberOfAgents ; i++){
             int alea = (int) (Math.random() * freeSlots.size());
-            myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()].setValue(i);
+            myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()]= new SlotAgent(freeSlots.get(alea).getX(), freeSlots.get(alea).getY());
+            freeSlots.remove(alea);
+        }
+        for(int i = 1; i<= numberOfObjects ; i++){
+
+            int alea = (int) (Math.random() * freeSlots.size());
+
+            myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()] = new Element(freeSlots.get(alea).getX(),freeSlots.get(alea).getY(), 2);
+            freeSlots.remove(alea);
+            alea = (int) (Math.random() * freeSlots.size());
+
+            myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()] = new Element(freeSlots.get(alea).getX(),freeSlots.get(alea).getY(), 8);
             freeSlots.remove(alea);
         }
     }
