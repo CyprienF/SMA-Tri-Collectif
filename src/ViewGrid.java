@@ -13,12 +13,10 @@ public class ViewGrid extends JComponent implements KeyListener {
 
     private Grid myGrid;
     private int sizeSlot;
-    private int sizeTab;
 
     public ViewGrid(Grid myGrid) {
         this.myGrid = myGrid;
-        this.sizeSlot = 600 / myGrid.getSize();
-        this.sizeTab = myGrid.getSize();
+        this.sizeSlot = 1000 / myGrid.getSizeM();
         this.setFocusable(true);
         this.addKeyListener(this);
     }
@@ -27,19 +25,19 @@ public class ViewGrid extends JComponent implements KeyListener {
         if (value == 0) {
             return Color.WHITE;
         } else {
-            return new Color((value * 1000) % 258, (value + 100) % 256, (value + 200) % 256, 200);
+            return new Color((value * 1000) % 256, (value + 100) % 256, (value + 200) % 256, 200);
         }
     }
 
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
-        sizeSlot = 600 / myGrid.getSize();
+        sizeSlot = 1000 / myGrid.getSizeM();
 
         g2D.setStroke(new BasicStroke(7));
         g2D.setFont(new Font("Times", Font.BOLD, sizeSlot / 4));
-        for (int i = 0; i < myGrid.getSize(); i++) {
-            for (int j = 0; j < myGrid.getSize(); j++) {
+        for (int i = 0; i < myGrid.getSizeM(); i++) {
+            for (int j = 0; j < myGrid.getSizeN(); j++) {
                 g2D.setColor(getColor(myGrid.getSlot(i, j)));
                 g2D.fillRect(j * sizeSlot, i * sizeSlot, sizeSlot, sizeSlot);
                 g2D.setColor(Color.BLACK);
@@ -54,7 +52,7 @@ public class ViewGrid extends JComponent implements KeyListener {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(sizeSlot * myGrid.getSize(), sizeSlot * myGrid.getSize());
+        return new Dimension(sizeSlot * myGrid.getSizeM(), sizeSlot * myGrid.getSizeN());
     }
 
     @Override

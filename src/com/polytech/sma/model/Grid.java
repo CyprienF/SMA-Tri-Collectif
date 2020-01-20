@@ -9,23 +9,38 @@ import java.util.ArrayList;
 public class Grid {
 
     private Slot myGrid[][];
-    private int size;
+    private int sizeN;
+    private int sizeM;
     private int numberFreeSlots;
-    
-    public int getSize() {
-        return size;
+
+
+    public int getSizeN() {
+        return sizeN;
+    }
+
+    public void setSizeN(int sizeN) {
+        this.sizeN = sizeN;
+    }
+
+    public int getSizeM() {
+        return sizeM;
+    }
+
+    public void setSizeM(int sizeM) {
+        this.sizeM = sizeM;
     }
 
     public int getSlot(int i, int j) {
         return myGrid[i][j].getValue();
     }
 
-    public Grid(int size, int numberFreeSlots) {
-        this.size = size;
+    public Grid(int sizeM, int sizeN, int numberFreeSlots) {
+        this.sizeM = sizeM;
+        this.sizeN = sizeN;
         this.numberFreeSlots = numberFreeSlots;
-        myGrid = new Slot[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        myGrid = new Slot[sizeM][sizeN];
+        for (int i = 0; i < sizeM; i++) {
+            for (int j = 0; j < sizeN; j++) {
                 myGrid[i][j] = new Slot(i, j);
             }
         }
@@ -41,7 +56,7 @@ public class Grid {
      */
     public boolean isMovementPossible(Slot s, int x, int y){
         boolean isPossible = true;
-        if(x<0 || y<0 || x>=this.size || y >= this.size) {
+        if(x<0 || y<0 || x>=this.sizeM || y >= this.sizeN) {
             isPossible = false;
         }
         return isPossible;
@@ -82,10 +97,10 @@ public class Grid {
     // }
     public void generateTaquin() {
         ArrayList<Slot> freeSlots = new ArrayList();
-        int numberOfEntities = this.size*this.size - this.numberFreeSlots;
+        int numberOfEntities = this.sizeM*this.sizeN - this.numberFreeSlots;
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < sizeM; i++) {
+            for (int j = 0; j < sizeN; j++) {
                 if (myGrid[i][j].getValue() == 0) {
                     freeSlots.add(myGrid[i][j]);
                 }
@@ -100,12 +115,14 @@ public class Grid {
     }
 
 
-    public void reset(int size, int numberFreeSlots) {
-        this.size = size;
+    public void reset(int sizeM, int sizeN, int numberFreeSlots) {
+        this.sizeM = sizeM;
+        this.sizeN = sizeN;
+
         this.numberFreeSlots = numberFreeSlots;
-        myGrid = new Slot[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        myGrid = new Slot[sizeM][sizeN];
+        for (int i = 0; i < sizeM; i++) {
+            for (int j = 0; j < sizeN; j++) {
                 myGrid[i][j] = new Slot(i, j);
             }
         }
@@ -352,8 +369,8 @@ public class Grid {
     @Override
     public String toString() {
         String s = new String();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < sizeM; i++) {
+            for (int j = 0; j < sizeN; j++) {
                 s += myGrid[i][j].getValue();
             }
             s += "\n";
