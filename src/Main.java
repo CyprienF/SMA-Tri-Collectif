@@ -3,7 +3,7 @@ import com.polytech.sma.model.Grid;
 public class Main {
 
     public static void main(String[] args) {
-        Grid grid=new Grid(10,10, 1);
+        Grid grid=new Grid(50,50, 20);
         System.out.println(grid);
         //grid.pushLeft();
         System.out.println(grid);
