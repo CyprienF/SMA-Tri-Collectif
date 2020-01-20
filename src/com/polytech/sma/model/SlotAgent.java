@@ -3,13 +3,9 @@ package com.polytech.sma.model;
 import java.util.ArrayList;
 
 public class SlotAgent extends Slot {
-    int objectiveX;
-    int objectiveY;
 
     public SlotAgent(int objectiveX, int objectiveY, int x, int y) {
         super(x, y);
-        this.objectiveX = objectiveX;
-        this.objectiveY = objectiveY;
     }
 
     public int getDistance(int x, int y){

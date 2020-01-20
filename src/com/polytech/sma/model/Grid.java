@@ -11,7 +11,7 @@ public class Grid {
     private Slot myGrid[][];
     private int sizeN;
     private int sizeM;
-    private int numberFreeSlots;
+    private int numberOfAgents;
 
 
     public int getSizeN() {
@@ -34,17 +34,17 @@ public class Grid {
         return myGrid[i][j].getValue();
     }
 
-    public Grid(int sizeM, int sizeN, int numberFreeSlots) {
+    public Grid(int sizeM, int sizeN, int numberOfAgents) {
         this.sizeM = sizeM;
         this.sizeN = sizeN;
-        this.numberFreeSlots = numberFreeSlots;
+        this.numberOfAgents = numberOfAgents;
         myGrid = new Slot[sizeM][sizeN];
         for (int i = 0; i < sizeM; i++) {
             for (int j = 0; j < sizeN; j++) {
                 myGrid[i][j] = new Slot(i, j);
             }
         }
-        generateTaquin();
+        generateGrid();
     }
 
     /**
@@ -95,9 +95,8 @@ public class Grid {
     //     }
 
     // }
-    public void generateTaquin() {
+    public void generateGrid() {
         ArrayList<Slot> freeSlots = new ArrayList();
-        int numberOfEntities = this.sizeM*this.sizeN - this.numberFreeSlots;
 
         for (int i = 0; i < sizeM; i++) {
             for (int j = 0; j < sizeN; j++) {
@@ -107,7 +106,7 @@ public class Grid {
             }
         }
 
-        for(int i = 1; i<= numberOfEntities ; i++){
+        for(int i = 1; i<= numberOfAgents ; i++){
             int alea = (int) (Math.random() * freeSlots.size());
             myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()].setValue(i);
             freeSlots.remove(alea);
@@ -115,18 +114,18 @@ public class Grid {
     }
 
 
-    public void reset(int sizeM, int sizeN, int numberFreeSlots) {
+    public void reset(int sizeM, int sizeN, int numberOfAgents) {
         this.sizeM = sizeM;
         this.sizeN = sizeN;
 
-        this.numberFreeSlots = numberFreeSlots;
+        this.numberOfAgents = numberOfAgents;
         myGrid = new Slot[sizeM][sizeN];
         for (int i = 0; i < sizeM; i++) {
             for (int j = 0; j < sizeN; j++) {
                 myGrid[i][j] = new Slot(i, j);
             }
         }
-        generateTaquin();
+        generateGrid();
     }
 
     public int[] getColumnValues(int colonne) {
