@@ -3,12 +3,8 @@ package com.polytech.sma.model;
 import java.util.ArrayList;
 
 public class SlotAgent extends Slot {
-<<<<<<< HEAD
     int objectiveX;
     int objectiveY;
-    int nbDeplacements;
-=======
->>>>>>> 62a849b16a684db8d1e7cf85880cbfc6a321e2b6
 
     public SlotAgent(int objectiveX, int objectiveY, int x, int y) {
         super(x, y);
