@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class SlotAgent extends Slot {
     int objectiveX;
     int objectiveY;
+    int nbDeplacements;
 
     public SlotAgent(int objectiveX, int objectiveY, int x, int y) {
         super(x, y);
