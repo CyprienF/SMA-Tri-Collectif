@@ -1,7 +1,5 @@
 package com.polytech.sma.model;
 
-import com.polytech.sma.model.Grid;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,12 +11,12 @@ import java.awt.event.KeyListener;
  */
 public class ViewGrid extends JComponent implements KeyListener {
 
-    private Grid myGrid;
+    private Environement myEnvironement;
     private int sizeSlot;
 
-    public ViewGrid(Grid myGrid) {
-        this.myGrid = myGrid;
-        this.sizeSlot = 800 / myGrid.getSizeM();
+    public ViewGrid(Environement myEnvironement) {
+        this.myEnvironement = myEnvironement;
+        this.sizeSlot = 800 / myEnvironement.getSizeM();
         this.setFocusable(true);
         this.addKeyListener(this);
     }
@@ -34,18 +32,18 @@ public class ViewGrid extends JComponent implements KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
-        sizeSlot = 800 / myGrid.getSizeM();
+        sizeSlot = 800 / myEnvironement.getSizeM();
 
         g2D.setStroke(new BasicStroke(3));
         g2D.setFont(new Font("Times", Font.BOLD, sizeSlot / 4));
-        for (int i = 0; i < myGrid.getSizeM(); i++) {
-            for (int j = 0; j < myGrid.getSizeN(); j++) {
-                g2D.setColor(getColor(myGrid.getSlot(i, j)));
+        for (int i = 0; i < myEnvironement.getSizeM(); i++) {
+            for (int j = 0; j < myEnvironement.getSizeN(); j++) {
+                g2D.setColor(getColor(myEnvironement.getSlot(i, j)));
                 g2D.fillRect(j * sizeSlot, i * sizeSlot, sizeSlot, sizeSlot);
                 g2D.setColor(Color.BLACK);
                 g2D.drawRect(j * sizeSlot, i * sizeSlot, sizeSlot, sizeSlot);
-                if (myGrid.getSlot(i, j) > 0) {
-                    g2D.drawString(Integer.toString(myGrid.getSlot(i, j)), j * sizeSlot + sizeSlot / 2, i * sizeSlot + sizeSlot / 2);
+                if (myEnvironement.getSlot(i, j) > 0) {
+                    g2D.drawString(Integer.toString(myEnvironement.getSlot(i, j)), j * sizeSlot + sizeSlot / 2, i * sizeSlot + sizeSlot / 2);
 
                 }
             }
@@ -54,7 +52,7 @@ public class ViewGrid extends JComponent implements KeyListener {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(sizeSlot * myGrid.getSizeM(), sizeSlot * myGrid.getSizeN());
+        return new Dimension(sizeSlot * myEnvironement.getSizeM(), sizeSlot * myEnvironement.getSizeN());
     }
 
     @Override
@@ -70,45 +68,45 @@ public class ViewGrid extends JComponent implements KeyListener {
         // if (ke.getKeyChar() == '-') {
         //     if (sizeTab > 2) {
         //         sizeTab--;
-        //         myGrid = new Grid(sizeTab);
+        //         myEnvironement = new Environement(sizeTab);
         //         this.repaint();
 
         //     }
         // } else if (ke.getKeyChar() == '+') {
         //     sizeTab++;
-        //     myGrid = new Grid(sizeTab);
+        //     myEnvironement = new Environement(sizeTab);
 
         //     this.repaint();
         // } else if (ke.getExtendedKeyCode() == ke.VK_UP) {
 
-        //     myGrid.pushUp();
+        //     myEnvironement.pushUp();
 
-        //     myGrid.controle0();
-        //     System.out.println(myGrid);
+        //     myEnvironement.controle0();
+        //     System.out.println(myEnvironement);
         //     this.repaint();
 
         // } else if (ke.getExtendedKeyCode() == ke.VK_DOWN) {
 
-        //     myGrid.pushDown();
+        //     myEnvironement.pushDown();
 
-        //     myGrid.controle0();
-        //     System.out.println(myGrid);
+        //     myEnvironement.controle0();
+        //     System.out.println(myEnvironement);
         //     this.repaint();
         // } else if (ke.getExtendedKeyCode() == ke.VK_LEFT) {
-        //     myGrid.pushLeft();
-        //     myGrid.controle0();
-        //     System.out.println(myGrid);
+        //     myEnvironement.pushLeft();
+        //     myEnvironement.controle0();
+        //     System.out.println(myEnvironement);
         //     this.repaint();
 
         // } else if (ke.getExtendedKeyCode() == ke.VK_RIGHT) {
-        //     myGrid.pushRight();
-        //     myGrid.controle0();
-        //     System.out.println(myGrid);
+        //     myEnvironement.pushRight();
+        //     myEnvironement.controle0();
+        //     System.out.println(myEnvironement);
         //     this.repaint();
         // }
-        // if (myGrid.gagne2048()) {
+        // if (myEnvironement.gagne2048()) {
         //     if ((JOptionPane.showConfirmDialog(this, "Vous avez gagné \n Voulez vous rejouer?", "", JOptionPane.YES_NO_OPTION)) == 0) {
-        //         myGrid.reset(sizeTab);
+        //         myEnvironement.reset(sizeTab);
 
         //         this.repaint();
 
@@ -120,9 +118,9 @@ public class ViewGrid extends JComponent implements KeyListener {
         
         //End game
 
-        // if (myGrid.pasdecoup()) {
+        // if (myEnvironement.pasdecoup()) {
         //     if ((JOptionPane.showConfirmDialog(this, "Vous avez perdu \n Voulez vous rejouer?", "", JOptionPane.YES_NO_OPTION)) == 0) {
-        //         myGrid.reset(sizeTab);
+        //         myEnvironement.reset(sizeTab);
 
         //         this.repaint();
 

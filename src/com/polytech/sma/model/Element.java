@@ -1,9 +1,17 @@
 package com.polytech.sma.model;
 
-public class Element extends Slot {
+public class Element{
+    private String letter;
 
-    public Element(int x, int y, int value) {
-        super(x, y);
-        this.setValue(value);
+    public Element(String letter) {
+        this.letter = letter;
+    }
+
+    public String getLetter() {
+        return letter;
+    }
+
+    public void setLetter(String letter) {
+        this.letter = letter;
     }
 }
