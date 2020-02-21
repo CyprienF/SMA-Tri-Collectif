@@ -22,7 +22,7 @@ public class Main {
             }
             environement.notifyView();
             try {
-                Thread.sleep(100);
+                Thread.sleep(400);
                 System.out.println(i);
             } catch (InterruptedException e) {
                 e.printStackTrace();

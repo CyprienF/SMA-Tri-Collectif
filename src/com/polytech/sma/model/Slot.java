@@ -41,6 +41,7 @@ public class Slot {
     public void setAgent(Agent agent) {
         if(agent == null){
             this.value = 0;
+            this.agent = null;
             return;
         }
         this.value = 64;
