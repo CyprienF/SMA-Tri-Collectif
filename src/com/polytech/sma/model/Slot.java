@@ -11,12 +11,19 @@ public class Slot {
     private Element element;
 
     public int getValue() {
-        return value;
+        if(agent != null){
+            return 64;
+        }
+        if(element != null){
+            if(element.getLetter().equals("A")){
+                return 2;
+            }else{
+                return 8;
+            }
+        }
+        return 0;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     public int getX() {
         return x;
@@ -56,15 +63,6 @@ public class Slot {
         return (this.agent == null && this.element==null);
     }
     public void setElements(Element element) {
-        if(element == null){
-            this.value= 0;
-            return;
-        }
-        if(element.getLetter().equals("A")){
-            this.value = 2;
-        }else{
-            this.value = 8;
-        }
         this.element = element;
     }
 

@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
  *
  * @author Stefano
  */
-public class ViewGrid extends JComponent implements KeyListener {
+public class ViewGrid extends JComponent {
 
     private Environement myEnvironement;
     private int sizeSlot;
@@ -18,7 +18,6 @@ public class ViewGrid extends JComponent implements KeyListener {
         this.myEnvironement = myEnvironement;
         this.sizeSlot = 800 / myEnvironement.getSizeM();
         this.setFocusable(true);
-        this.addKeyListener(this);
     }
 
     public static Color getColor(int value) {
@@ -55,78 +54,4 @@ public class ViewGrid extends JComponent implements KeyListener {
         return new Dimension(sizeSlot * myEnvironement.getSizeM(), sizeSlot * myEnvironement.getSizeN());
     }
 
-    @Override
-    public void keyTyped(KeyEvent ke) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent ke) {
-    }
-
-    @Override
-    public void keyReleased(KeyEvent ke) {
-        // if (ke.getKeyChar() == '-') {
-        //     if (sizeTab > 2) {
-        //         sizeTab--;
-        //         myEnvironement = new Environement(sizeTab);
-        //         this.repaint();
-
-        //     }
-        // } else if (ke.getKeyChar() == '+') {
-        //     sizeTab++;
-        //     myEnvironement = new Environement(sizeTab);
-
-        //     this.repaint();
-        // } else if (ke.getExtendedKeyCode() == ke.VK_UP) {
-
-        //     myEnvironement.pushUp();
-
-        //     myEnvironement.controle0();
-        //     System.out.println(myEnvironement);
-        //     this.repaint();
-
-        // } else if (ke.getExtendedKeyCode() == ke.VK_DOWN) {
-
-        //     myEnvironement.pushDown();
-
-        //     myEnvironement.controle0();
-        //     System.out.println(myEnvironement);
-        //     this.repaint();
-        // } else if (ke.getExtendedKeyCode() == ke.VK_LEFT) {
-        //     myEnvironement.pushLeft();
-        //     myEnvironement.controle0();
-        //     System.out.println(myEnvironement);
-        //     this.repaint();
-
-        // } else if (ke.getExtendedKeyCode() == ke.VK_RIGHT) {
-        //     myEnvironement.pushRight();
-        //     myEnvironement.controle0();
-        //     System.out.println(myEnvironement);
-        //     this.repaint();
-        // }
-        // if (myEnvironement.gagne2048()) {
-        //     if ((JOptionPane.showConfirmDialog(this, "Vous avez gagné \n Voulez vous rejouer?", "", JOptionPane.YES_NO_OPTION)) == 0) {
-        //         myEnvironement.reset(sizeTab);
-
-        //         this.repaint();
-
-        //     } else {
-        //         System.exit(0);
-        //     }
-
-        // }
-        
-        //End game
-
-        // if (myEnvironement.pasdecoup()) {
-        //     if ((JOptionPane.showConfirmDialog(this, "Vous avez perdu \n Voulez vous rejouer?", "", JOptionPane.YES_NO_OPTION)) == 0) {
-        //         myEnvironement.reset(sizeTab);
-
-        //         this.repaint();
-
-        //     } else {
-        //         System.exit(0);
-        //     }
-        // }
-    }
 }

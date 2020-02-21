@@ -12,7 +12,7 @@ public class Agent{
     private Environement environement;
 
     private Element takenElement;
-    private ArrayList<Element> elementsNearBy;
+    private ArrayList<ArrayList<Slot>> nearBySlots;
 
     private ArrayList<Movement> possibleMovement;
 
@@ -23,12 +23,23 @@ public class Agent{
         this.kNeg = kNeg;
         this.environement = environement;
         this.memory= new ArrayList<>();
-        this.elementsNearBy = new ArrayList<>();
+        this.nearBySlots = new ArrayList<>();
         this.possibleMovement = new ArrayList<>();
         this.takenElement= null;
     }
 
     public void action(){
+
+        //if agant has element drop
+
+            //return
+        //else element pickup
+            //see nearby elements
+
+            // return
+        //
+
+        // Agent decide to move
         if(possibleMovement.size()==0){
             return;
         }
@@ -48,6 +59,8 @@ public class Agent{
     public ArrayList<String> getMemory() {
         return memory;
     }
+
+
     public void addElmentmentMemory(String visualized){
         if(memory.size() == 10){
             memory.remove(0);
@@ -72,32 +85,16 @@ public class Agent{
     }
 
 
-    public ArrayList<Element> getElementsNearBy() {
-        return elementsNearBy;
-    }
-
     public ArrayList<Movement> getPossibleMovement() {
         return possibleMovement;
     }
 
-    public void setMoveIndex(int moveIndex) {
-        this.moveIndex = moveIndex;
+    public ArrayList<ArrayList<Slot>> getNearBySlots() {
+        return nearBySlots;
     }
 
-    public void setkPos(double kPos) {
-        this.kPos = kPos;
-    }
-
-    public void setkNeg(double kNeg) {
-        this.kNeg = kNeg;
-    }
-
-    public void setTakenElement(Element takenElement) {
-        this.takenElement = takenElement;
-    }
-
-    public void setElementsNearBy(ArrayList<Element> elementsNearBy) {
-        this.elementsNearBy = elementsNearBy;
+    public void setNearBySlots(ArrayList<ArrayList<Slot>> nearBySlots) {
+        this.nearBySlots = nearBySlots;
     }
 
     public void setPossibleMovement(ArrayList<Movement> possibleMovement) {
@@ -115,13 +112,13 @@ public class Agent{
                 Objects.equals(getMemory(), agent.getMemory()) &&
                 Objects.equals(environement, agent.environement) &&
                 Objects.equals(getTakenElement(), agent.getTakenElement()) &&
-                Objects.equals(getElementsNearBy(), agent.getElementsNearBy()) &&
+                Objects.equals(getNearBySlots(), agent.getNearBySlots()) &&
                 Objects.equals(getPossibleMovement(), agent.getPossibleMovement());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMoveIndex(), getMemory(), getkPos(), getkNeg(), environement, getTakenElement(), getElementsNearBy(), getPossibleMovement());
+        return Objects.hash(getMoveIndex(), getMemory(), getkPos(), getkNeg(), environement, getTakenElement(), getNearBySlots(), getPossibleMovement());
     }
 
 }

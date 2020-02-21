@@ -161,10 +161,9 @@ public class Environement {
         if((agentY+agent.getMoveIndex())<this.sizeN &&  myGrid[agentX][agentY+agent.getMoveIndex()].isFree()){
             autorizedMovements.add(Movement.RIGHT);
         }
-
         agent.setPossibleMovement(autorizedMovements);
 
-        ArrayList<Element> elementsNearBy = new ArrayList<>();
+        ArrayList<ArrayList<Slot>> nearBySlots = new ArrayList<>();
         int x0 = agentX-agent.getMoveIndex();
         int xf = agentX+agent.getMoveIndex();
         int y0 = agentY-agent.getMoveIndex();
@@ -182,16 +181,19 @@ public class Environement {
         if(yf> this.sizeN){
             yf=this.sizeN;
         }
-        for(int i =x0; i<xf;i++){
-            for(int j =y0; j<yf;j++){
-                if(myGrid[i][j].getElement()!=null){
-                    elementsNearBy.add(myGrid[i][j].getElement());
-                }
+        for(int i = x0; i<xf;i++){
+            ArrayList<Slot> slots = new ArrayList<>();
+
+            for(int j = y0; j<yf;j++){
+                slots.add(myGrid[i][j]);
             }
+            nearBySlots.add( slots);
         }
-        agent.setElementsNearBy(elementsNearBy);
+        agent.setNearBySlots(nearBySlots);
 
     }
+
+
     @Override
     public String toString() {
         String s = new String();
