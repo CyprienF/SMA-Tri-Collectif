@@ -38,8 +38,6 @@ public class Agent{
 
     public void action(){
 
-        //if agant has element drop
-
         if(this.takenElement != null){
             double dropProba = calculateProbaDrop(nearbySlotPercentage());
             if(Math.random()<dropProba){
@@ -50,7 +48,6 @@ public class Agent{
                     environement.dropElementFromAgent(this, slotToDrop);
                     return;
                 }
-
             }
         }else{
             double pickUpAProba = getObjectFrequencyInMemory("A");
@@ -78,14 +75,13 @@ public class Agent{
                     return;
                 }
 
-
             }
-            //check if we can pick up
         }
 
         if(possibleMovement.size()==0){
             return;
         }
+
         int alea = (int) (Math.random() * possibleMovement.size());
         Movement selectedMove = possibleMovement.get(alea);
         environement.moveAgents(this, selectedMove);
@@ -122,7 +118,6 @@ public class Agent{
                 }
         }
         return  occurences/this.memory.size();
-
     }
 
     public double nearbySlotPercentage(){
@@ -133,7 +128,6 @@ public class Agent{
                 if(this.nearBySlots.get(i).get(j).getElement()!=null && this.nearBySlots.get(i).get(j).getElement().getLetter().compareTo(this.takenElement.getLetter())==0){
                     numberOfSameElements++;
                 }
-
                 numberOfSlots++;
             }
         }
@@ -147,7 +141,6 @@ public class Agent{
                 if(this.nearBySlots.get(i).get(j).isFree()){
                     freeSlots.add(this.nearBySlots.get(i).get(j));
                 }
-
             }
         }
         return freeSlots;
@@ -166,7 +159,6 @@ public class Agent{
                         }
                     }
                 }
-
             }
         }
         return elementsCordinates;
@@ -178,10 +170,6 @@ public class Agent{
         }
         memory.add(visualized);
     };
-
-    public void setMemory(ArrayList<String> memory) {
-        this.memory = memory;
-    }
 
     public double getkPos() {
         return kPos;

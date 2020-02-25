@@ -29,17 +29,11 @@ public class Slot {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
 
     public Agent getAgent() {
         return agent;
@@ -63,6 +57,7 @@ public class Slot {
         return (this.agent == null && this.element==null);
     }
     public void setElements(Element element) {
+
         if(element == null){
             this.value = 0;
             this.element = null;

@@ -15,6 +15,7 @@ public class Environement {
     private int numberOfAgents;
     private int numberOfObjects;
     private int AGENT_MOVE_INDEX;
+
     private ViewGrid view;
     private ArrayList<Agent> agentsList;
 
@@ -56,13 +57,10 @@ public class Environement {
 
         //Generate all objects
         for(int i = 1; i<= numberOfObjects ; i++){
-
             int alea = (int) (Math.random() * freeSlots.size());
-
             myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()].setElements(new Element("A"));
             freeSlots.remove(alea);
             alea = (int) (Math.random() * freeSlots.size());
-
             myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()].setElements(new Element("B"));
             freeSlots.remove(alea);
         }
@@ -132,13 +130,11 @@ public class Environement {
     }
 
     public void agentPickUpElement(Agent agent, Slot pickupSlot){
-        int[] coordinates = agentCoordinates(agent);
         agent.setTakenElement(this.myGrid[pickupSlot.getX()][pickupSlot.getY()].getElement());
         this.myGrid[pickupSlot.getX()][pickupSlot.getY()].setElements(null);
     }
 
     public void dropElementFromAgent(Agent agent, Slot dropSlot){
-        int[] coordinates = agentCoordinates(agent);
         this.myGrid[dropSlot.getX()][dropSlot.getY()]
                 .setElements(agent.getTakenElement());
         agent.setTakenElement(null);
@@ -198,7 +194,6 @@ public class Environement {
             nearBySlots.add( slots);
         }
         agent.setNearBySlots(nearBySlots);
-
     }
 
 
