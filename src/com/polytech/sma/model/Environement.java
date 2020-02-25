@@ -14,14 +14,16 @@ public class Environement {
 
     private int numberOfAgents;
     private int numberOfObjects;
+    private int AGENT_MOVE_INDEX;
     private ViewGrid view;
     private ArrayList<Agent> agentsList;
 
-    public Environement(int sizeM, int sizeN, int numberOfAgents, int numberOfObject) {
+    public Environement(int sizeM, int sizeN, int numberOfAgents, int numberOfObject, int agentMoveIndex) {
         this.sizeM = sizeM;
         this.sizeN = sizeN;
         this.numberOfAgents = numberOfAgents;
         this.numberOfObjects = numberOfObject;
+        this.AGENT_MOVE_INDEX =agentMoveIndex;
         this.agentsList = new ArrayList<>();
         myGrid = new Slot[sizeM][sizeN];
         for (int i = 0; i < sizeM; i++) {
@@ -46,7 +48,7 @@ public class Environement {
         //Generates all the agents
         for(int i = 1; i<= numberOfAgents ; i++){
             int alea = (int) (Math.random() * freeSlots.size());
-            agentsList.add(new Agent(1,0.1,0.3, this));
+            agentsList.add(new Agent(this.AGENT_MOVE_INDEX,0.1,0.3, this, 10));
             myGrid[freeSlots.get(alea).getX()][freeSlots.get(alea).getY()].setAgent(agentsList.get(agentsList.size()-1));
             freeSlots.remove(alea);
         }
@@ -94,39 +96,52 @@ public class Environement {
         return myGrid[i][j].getValue();
     }
 
-
-
-    public void moveAgents(Agent agent, Movement movement){
-
-        int agentX = -1;
-        int agentY = -1;
+    public int[] agentCoordinates(Agent agent){
+        int[] coordinates = new int[2];
         for(int i = 0 ; i<this.myGrid.length; i++){
             for(int j = 0 ; j<this.myGrid[i].length; j++){
                 if(myGrid[i][j].getAgent() == agent ){
-                    agentX=i;
-                    agentY=j;
+                    coordinates[0]=i;
+                    coordinates[1]=j;
                     break;
                 }
             }
         }
+        return coordinates;
+    }
+
+    public void moveAgents(Agent agent, Movement movement){
+        int[] coordinates = agentCoordinates(agent);
 
         switch (movement){
             case UP:
-               this.myGrid[agentX-agent.getMoveIndex()][agentY].setAgent(agent);
+               this.myGrid[coordinates[0]-agent.getMoveIndex()][coordinates[1]].setAgent(agent);
                 break;
             case DOWN:
-                this.myGrid[agentX+agent.getMoveIndex()][agentY].setAgent(agent);
+                this.myGrid[coordinates[0]+agent.getMoveIndex()][coordinates[1]].setAgent(agent);
                 break;
             case RIGHT:
-                this.myGrid[agentX][agentY+agent.getMoveIndex()].setAgent(agent);
+                this.myGrid[coordinates[0]][coordinates[1]+agent.getMoveIndex()].setAgent(agent);
                 break;
             case LEFT:
-                this.myGrid[agentX][agentY-agent.getMoveIndex()].setAgent(agent);
+                this.myGrid[coordinates[0]][coordinates[1]-agent.getMoveIndex()].setAgent(agent);
                 break;
         }
-        this.myGrid[agentX][agentY].setAgent(null);
+        this.myGrid[coordinates[0]][coordinates[1]].setAgent(null);
 
+    }
 
+    public void agentPickUpElement(Agent agent, Slot pickupSlot){
+        int[] coordinates = agentCoordinates(agent);
+        agent.setTakenElement(this.myGrid[pickupSlot.getX()][pickupSlot.getY()].getElement());
+        this.myGrid[pickupSlot.getX()][pickupSlot.getY()].setElements(null);
+    }
+
+    public void dropElementFromAgent(Agent agent, Slot dropSlot){
+        int[] coordinates = agentCoordinates(agent);
+        this.myGrid[dropSlot.getX()][dropSlot.getY()]
+                .setElements(agent.getTakenElement());
+        agent.setTakenElement(null);
     }
 
     public void notifyView(){
@@ -134,19 +149,12 @@ public class Environement {
     }
 
     public void agentPerception(Agent agent){
+        int[] coordinates = agentCoordinates(agent);
 
         //Possible mouvement
-        int agentX = -1;
-        int agentY = -1;
-        for(int i = 0 ; i<this.myGrid.length; i++){
-            for(int j = 0 ; j<this.myGrid[i].length; j++){
-                if(myGrid[i][j].getAgent() == agent ){
-                    agentX=i;
-                    agentY=j;
-                    break;
-                }
-            }
-        }
+        int agentX = coordinates[0];
+        int agentY = coordinates[1];
+
         ArrayList<Movement> autorizedMovements = new ArrayList<>();
 
         if((agentX-agent.getMoveIndex())>=0 && myGrid[agentX-agent.getMoveIndex()][agentY].isFree() ){

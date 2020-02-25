@@ -63,6 +63,17 @@ public class Slot {
         return (this.agent == null && this.element==null);
     }
     public void setElements(Element element) {
+        if(element == null){
+            this.value = 0;
+            this.element = null;
+            return;
+        }
+
+        if(element.getLetter().equals("A")){
+            this.value= 2;
+        }else{
+            this.value = 8;
+        }
         this.element = element;
     }
 
